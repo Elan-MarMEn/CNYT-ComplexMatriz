@@ -6,19 +6,19 @@ public class TestComplexNumber extends TestCase {
     public void testadd(){
         ComplexNumber c= new ComplexNumber(12,14);
         ComplexNumber c2= new ComplexNumber(26,34);
-        c2.add(c);
+        ComplexNumber res = c2.add(c);
 
-        assertEquals(c2.getRealPart(),38.0);
-        assertEquals(c2.getImaginaryPart(),48.0);
+        assertEquals(res.getRealPart(),38.0);
+        assertEquals(res.getImaginaryPart(),48.0);
     }
 
     public void testadd2(){
         ComplexNumber c= new ComplexNumber(12,-24);
         ComplexNumber c2= new ComplexNumber(26,-43);
-        c2.add(c);
+        ComplexNumber res = c2.add(c);
 
-        assertEquals(c2.getRealPart(),38.0);
-        assertEquals(c2.getImaginaryPart(),-1*(67.0));
+        assertEquals(res.getRealPart(),38.0);
+        assertEquals(res.getImaginaryPart(),-1*(67.0));
     }
 
 //    public void testadd3(){
@@ -32,47 +32,47 @@ public class TestComplexNumber extends TestCase {
     public void testmultiply(){
         ComplexNumber c= new ComplexNumber(12,14);
         ComplexNumber c2= new ComplexNumber(26,34);
-        c.multiply(c2);
+        ComplexNumber res =c.multiply(c2);
 
-        assertEquals(c.getRealPart(),-164.0);
-        assertEquals(c.getImaginaryPart(),772.0);
+        assertEquals(res.getRealPart(),-164.0);
+        assertEquals(res.getImaginaryPart(),772.0);
     }
 
     public void testmultiply2(){
         ComplexNumber c= new ComplexNumber(12,-45);
         ComplexNumber c2= new ComplexNumber(26,-26);
-        c.multiply(c2);
-        assertEquals(c.getRealPart(),-858.0);
-        assertEquals(c.getImaginaryPart(),-1*(1482.0));
+        ComplexNumber res = c.multiply(c2);
+        assertEquals(res.getRealPart(),-858.0);
+        assertEquals(res.getImaginaryPart(),-1*(1482.0));
     }
 
     public void testrest(){
         ComplexNumber c= new ComplexNumber(12,14);
         ComplexNumber c2= new ComplexNumber(26,34);
-        c2.rest(c);
+        ComplexNumber res =c2.rest(c);
 
-        assertEquals(c2.getRealPart(),14.0);
-        assertEquals(c2.getImaginaryPart(),20.0);
+        assertEquals(res.getRealPart(),14.0);
+        assertEquals(res.getImaginaryPart(),20.0);
     }
 
     public void testrest2(){
         ComplexNumber c= new ComplexNumber(12,-98);
         ComplexNumber c2= new ComplexNumber(26,-102);
-        c2.rest(c);
+        ComplexNumber res =c2.rest(c);
 
-        assertEquals(c2.getRealPart(),14.0);
-        assertEquals(c2.getImaginaryPart(),-1*(4.0));
+        assertEquals(res.getRealPart(),14.0);
+        assertEquals(res.getImaginaryPart(),-1*(4.0));
     }
 
     public void testdiv(){
         ComplexNumber c= new ComplexNumber(12,14);
         ComplexNumber c2= new ComplexNumber(26,34);
-        c.div(c2);
+        ComplexNumber res = c.div(c2);
         double x =(12.0*26.0 + 14.0*34.0)/(26*26 + 34*34);
         double y =(14.0*26.0 -12.0*34.0)/(26*26 + 34*34);
 
-        assertEquals(c.getRealPart(),x);
-        assertEquals(c.getImaginaryPart(),y);
+        assertEquals(res.getRealPart(),x);
+        assertEquals(res.getImaginaryPart(),y);
     }
 
     public void testmodul(){
@@ -84,9 +84,9 @@ public class TestComplexNumber extends TestCase {
 
     public void testconjugate(){
         ComplexNumber c= new ComplexNumber(12,14);
-        c.conjugate();
+        ComplexNumber res =c.conjugate();
 
-        assertEquals(c.getImaginaryPart(),-14.0);
+        assertEquals(res.getImaginaryPart(),-14.0);
     }
 
     public void testto_polarTo_Cartisian(){

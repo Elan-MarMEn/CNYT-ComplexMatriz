@@ -1,63 +1,38 @@
 public class OperationsMatriz {
     
     public ComplexMatriz sumaVectores(ComplexMatriz v1, ComplexMatriz v2) {
-        ComplexMatriz newVector = new ComplexMatriz(v1.getc(),v1.getf());
+        ComplexMatriz newVector = new ComplexMatriz(v1.getlengthVector());
 
-        for (int i=0; i<v1.getc();i++) {
-
-            ComplexNumber temp = v1.getvector()[i];
-            temp.add(v2.getvector()[i]);
+        for (int i=0; i<v1.getlengthVector();i++) {
+            ComplexNumber temp = v1.getvector()[i].add(v2.getvector()[i]);
             newVector.getvector()[i]=temp;
         }
         return newVector;
 
     }
-
 
     public ComplexMatriz restaVectores(ComplexMatriz v1, ComplexMatriz v2) {
-        ComplexMatriz newVector = new ComplexMatriz(v1.getc(),v1.getf());
+        ComplexMatriz newVector = new ComplexMatriz(v1.getlengthVector());
 
-        for (int i=0; i<v1.getc();i++) {
+        for (int i=0; i<v1.getlengthVector();i++) {
 
-            ComplexNumber temp = v1.getvector()[i];
-            temp.rest(v2.getvector()[i]);
+            ComplexNumber temp = v1.getvector()[i].rest(v2.getvector()[i]);
             newVector.getvector()[i]=temp;
         }
         return newVector;
 
     }
-
 
     public ComplexMatriz productoEscalarVector(ComplexMatriz v1, ComplexNumber a) {
-        ComplexMatriz newVector = new ComplexMatriz(v1.getc(),v1.getf());
+        ComplexMatriz newVector = new ComplexMatriz(v1.getlengthVector());
+        for (int i=0; i<v1.getlengthVector();i++) {
 
-        for (int i=0; i<v1.getc();i++) {
-
-            ComplexNumber temp = v1.getvector()[i];
-            temp.multiply(a);
+            ComplexNumber temp = v1.getvector()[i].multiply(a);;
             newVector.getvector()[i]=temp;
         }
 
         return newVector;
     }
-
-
-    public ComplexMatriz MatrizIdentidad(ComplexMatriz A) {
-        ComplexMatriz newMatriz= new ComplexMatriz(A.getc(),A.getf());
-
-        for(int i=0;i<A.getc();i++) {
-            for(int j=0;j<A.getf();j++) {
-                if(i==j) {
-                    newMatriz.getmatriz()[i][j]=new ComplexNumber(1,0);
-                }
-                else {
-                    newMatriz.getmatriz()[i][j]=new ComplexNumber(1,0);
-                }
-            }
-        }
-        return newMatriz;
-    }
-
 
     public ComplexMatriz sumaComplexMatrizs(ComplexMatriz A, ComplexMatriz B) {
         if((A.getf()==B.getf()) && (A.getc()==B.getc())) {
@@ -67,8 +42,7 @@ public class OperationsMatriz {
 
                 for(int j=0;j<B.getc();j++) {
 
-                    ComplexNumber temp = A.getmatriz()[i][j];
-                    temp.add(B.getmatriz()[i][j]);
+                    ComplexNumber temp = A.getmatriz()[i][j].add(B.getmatriz()[i][j]);
                     newMatriz.getmatriz()[i][j]=temp;
                 }
             }
@@ -80,7 +54,6 @@ public class OperationsMatriz {
         }
 
     }
-
 
     public ComplexMatriz restaComplexMatrizs(ComplexMatriz A, ComplexMatriz B) {
         if((A.getf()==B.getf()) && (A.getc()==B.getc())) {
@@ -90,8 +63,7 @@ public class OperationsMatriz {
 
                 for(int j=0;j<B.getc();j++) {
 
-                    ComplexNumber temp = A.getmatriz()[i][j];
-                    temp.rest(B.getmatriz()[i][j]);
+                    ComplexNumber temp = A.getmatriz()[i][j].rest(B.getmatriz()[i][j]);
                     newMatriz.getmatriz()[i][j]=temp;
                 }
             }
@@ -102,7 +74,6 @@ public class OperationsMatriz {
         }
     }
 
-
     public ComplexMatriz productoEscalarMatriz( ComplexNumber c, ComplexMatriz A) {
         ComplexMatriz newMatriz = new ComplexMatriz(A.getc(),A.getf());
 
@@ -110,8 +81,7 @@ public class OperationsMatriz {
 
             for (int j=0;j<A.getf();j++) {
 
-                ComplexNumber temp = A.getmatriz()[i][j];
-                temp.multiply(c);
+                ComplexNumber temp = A.getmatriz()[i][j].multiply(c);
                 newMatriz.getmatriz()[i][j]=temp;
             }
         }
@@ -136,8 +106,7 @@ public class OperationsMatriz {
 
             for(int j=0; j<newMatriz.getf();j++) {
 
-                ComplexNumber temp = A.getmatriz()[i][j];
-                temp.conjugate();
+                ComplexNumber temp = A.getmatriz()[i][j].conjugate();
                 newMatriz.getmatriz()[i][j] = temp;
             }
         }
@@ -148,8 +117,7 @@ public class OperationsMatriz {
         ComplexMatriz newVector = new ComplexMatriz(A.getlengthVector());
 
         for(int i=0; i<newVector.getlengthVector();i++) {
-            ComplexNumber temp = A.getvector()[i];
-            temp.conjugate();
+            ComplexNumber temp = A.getvector()[i].conjugate();
             newVector.getvector()[i] = temp;
         }
         return newVector;
@@ -167,9 +135,9 @@ public class OperationsMatriz {
                     ComplexNumber temp = new ComplexNumber(0,0);
                     for(int k=0; k<B.getf();k++) {
 
-                        ComplexNumber temp2 = A.getmatriz()[i][k];
-                        temp2.multiply(B.getmatriz()[k][j]);
-                        temp.add(temp2);
+                        ComplexNumber temp2 = A.getmatriz()[i][k].multiply(B.getmatriz()[k][j]);
+
+                        temp=temp.add(temp2);
                     }
 
                     newMatriz.getmatriz()[i][j]=temp;
@@ -180,20 +148,16 @@ public class OperationsMatriz {
 
     }
 
-    public ComplexNumber distanciaVectores(ComplexMatriz v1, ComplexMatriz v2){
-        ComplexNumber c = new ComplexNumber(-1,0);
-        ComplexMatriz temp1 = productoEscalarVector(v1,c);
-        temp1 = sumaVectores(v1,v2);
-        ComplexNumber dis = productoInterno(temp1,temp1);
+    public double distanciaVectores(ComplexMatriz v1, ComplexMatriz v2){
+
+        ComplexMatriz temp1 = restaVectores(v1,v2);
+        double dis = normaMatriz(v1);
         return dis;
     }
 
     public double normaMatriz(ComplexMatriz v1) {
-        double a=0.0;
-        for(int i=0;i<v1.getlengthVector();i++) {
-            a+=Math.pow(v1.getvector()[i].modull(), 2);
-        }
-        double norma = Math.sqrt(a);
+        ComplexNumber temp = productoInterno(v1,v1);
+        double norma = Math.sqrt(temp.realPart);
         return norma;
 
     }
@@ -213,10 +177,11 @@ public class OperationsMatriz {
                 }
             }
         }
-        ComplexMatriz resp = multiplicacionMatrices(adjunta(A),A);
-        ComplexMatriz resp1 = multiplicacionMatrices(A,adjunta(A));
+        ComplexMatriz newM = multiplicacionMatrices(adjunta(A),A);
+        ComplexMatriz newM1 = multiplicacionMatrices(A,adjunta(A));
 
-        if(resp.equals(unitaria)&& resp1.equals(unitaria)) {
+
+        if(newM.same(unitaria)&& newM1.same(unitaria)) {
             return true;
         }
         else {
@@ -226,7 +191,7 @@ public class OperationsMatriz {
 
     public  Boolean Hermitiana(ComplexMatriz A) {
 
-        if(adjunta(A).equals(A)) {
+        if(adjunta(A).same(A)) {
             return true;
         }
         else {
@@ -239,20 +204,17 @@ public class OperationsMatriz {
     public ComplexNumber productoInterno(ComplexMatriz v1, ComplexMatriz v2) {
         ComplexNumber temp = new ComplexNumber(0,0);
 
-        if(v1.getlengthVector()==v2.getlengthVector()){
-            for(int i=0; i<v1.getlengthVector();i++) {
+        ComplexMatriz conjv1 = conjugadaVector(v1);
 
-                ComplexNumber temp2 = v1.getvector()[i];
-                temp2.multiply(v2.getvector()[i]);
-                temp.add(temp2);
-            }
-            return temp;
+        for(int i=0; i<conjv1.getlengthVector();i++) {
+
+            ComplexNumber temp2 = conjv1.getvector()[i].multiply(v2.getvector()[i]);
+            temp=temp.add(temp2);
+
         }
-        else {
-            return null;
-        }
+        return temp;
+
     }
-
 
     public ComplexMatriz productoTensor(ComplexMatriz A, ComplexMatriz B) {
         ComplexMatriz prodTensor= new ComplexMatriz(A.getc()*B.getc(),A.getf()*B.getf());
@@ -260,8 +222,7 @@ public class OperationsMatriz {
             for(int j=0; j<A.getf();j++) {
                 for(int k=0;k<B.getc();k++) {
                     for(int l=0; l<B.getf();l++) {
-                        ComplexNumber temp = A.getmatriz()[j][i];
-                        temp.multiply(B.getmatriz()[l][k]);
+                        ComplexNumber temp = A.getmatriz()[j][i].multiply(B.getmatriz()[l][k]);
                         prodTensor.getmatriz()[i*B.getc()+k][j*B.getf()+l]=temp;
                     }
                 }

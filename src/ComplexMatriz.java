@@ -59,4 +59,19 @@ public class ComplexMatriz {
         this.lengthVector=lengthVector;
     }
 
+    public boolean same(ComplexMatriz B){
+        Boolean response=true;
+
+        if(f==B.f && c==B.c) {
+            for(int i=0; i<f;i++) {
+                for(int j=0; j<c;j++) {
+                    response &= Math.round(this.getmatriz()[i][j].getRealPart())==B.getmatriz()[i][j].getRealPart();
+                    response &= Math.round(this.getmatriz()[i][j].getImaginaryPart())==B.getmatriz()[i][j].getImaginaryPart();
+                }
+            }
+        }
+        return response;
+
+    }
+
 }

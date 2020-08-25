@@ -16,29 +16,37 @@ public class ComplexNumber {
         return imaginaryPart;
     }
 
-    public void add(ComplexNumber c){
-        realPart+=c.realPart;
-        imaginaryPart+=c.imaginaryPart;
+    public ComplexNumber add(ComplexNumber c){
+        double r = c.realPart + realPart;
+        double i = c.imaginaryPart + imaginaryPart;
+        ComplexNumber res = new ComplexNumber(r,i);
+        return res;
     }
 
-    public void multiply(ComplexNumber c){
+    public ComplexNumber multiply(ComplexNumber c){
         double realtemp=realPart;
 
-        realPart=(realPart*c.realPart - imaginaryPart*c.imaginaryPart);
-        imaginaryPart=(imaginaryPart*c.realPart + realtemp*c.imaginaryPart);
+        double r=(realPart*c.realPart - imaginaryPart*c.imaginaryPart);
+        double i=(imaginaryPart*c.realPart + realtemp*c.imaginaryPart);
+        ComplexNumber res = new ComplexNumber(r,i);
+        return res;
     }
 
-    public void rest(ComplexNumber c){
-        realPart-=c.realPart;
-        imaginaryPart-=c.imaginaryPart;
+    public ComplexNumber rest(ComplexNumber c){
+        double r=realPart - c.realPart;
+        double i=imaginaryPart - c.imaginaryPart;
+        ComplexNumber res = new ComplexNumber(r,i);
+        return res;
     }
 
-    public void div(ComplexNumber c){
+    public ComplexNumber div(ComplexNumber c){
         double x=c.realPart*c.realPart + c.imaginaryPart*c.imaginaryPart;
         double realtemp=realPart;
 
-        realPart=(realPart*c.realPart + imaginaryPart*c.imaginaryPart)/x;
-        imaginaryPart=(imaginaryPart*c.realPart - realtemp*c.imaginaryPart)/x;
+        double r=(realPart*c.realPart + imaginaryPart*c.imaginaryPart)/x;
+        double i=(imaginaryPart*c.realPart - realtemp*c.imaginaryPart)/x;
+        ComplexNumber res = new ComplexNumber(r,i);
+        return res;
     }
 
     public double modull(){
@@ -46,8 +54,10 @@ public class ComplexNumber {
         return m;
     }
 
-    public void conjugate(){
-        imaginaryPart*=-1;
+    public ComplexNumber conjugate(){
+        double i=-1*imaginaryPart;
+        ComplexNumber res = new ComplexNumber(realPart,i);
+        return res;
     }
 
     public void to_polar(){
@@ -66,5 +76,7 @@ public class ComplexNumber {
         double f = Math.atan(imaginaryPart/realPart);
         return f;
     }
+
+
 
 }
